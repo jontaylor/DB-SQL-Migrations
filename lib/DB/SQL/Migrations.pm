@@ -33,8 +33,12 @@ sub _pending_migrations {
   my @pending_migrations;
 
   foreach my $migration_file( $self->_migration_files_in_order ) {
-    my $migration_key = $self->migration_key($migration_file);
+    my $migration_key = $self->_migration_key($migration_file);
     push @pending_migrations, $migration_file unless exists $self->_applied_migrations->{$migration_key};
+  }
+
+  foreach my $pending_migration(@pending_migrations) {
+    print "$pending_migration is pending\n";
   }
 
   return @pending_migrations;
@@ -43,11 +47,19 @@ sub _pending_migrations {
 sub apply {
   my $self = shift;
 
-  print "Processing migrations \n";
+  my @pending_migrations = $self->_pending_migrations;
 
-  foreach my $migration($self->_pending_migrations) {
-    $self->_apply_migration($migration);
-  } 
+  if(scalar(@pending_migrations)) {
+    print "Proceeding in 2 seconds, Ctrl-C to abort\n";
+    sleep(2);
+
+    foreach my $migration(@pending_migrations) {
+      $self->_apply_migration($migration);
+    }
+  }
+  else {
+    print "Up to date\n";
+  }   
 }
 
 sub _apply_migration {
