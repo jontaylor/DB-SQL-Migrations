@@ -33,7 +33,8 @@ sub _pending_migrations {
   my @pending_migrations;
 
   foreach my $migration_file( $self->_migration_files_in_order ) {
-    push @pending_migrations, $migration_file unless exists $self->_applied_migrations->{$migration_file};
+    my $migration_key = $self->migration_key($migration_file);
+    push @pending_migrations, $migration_file unless exists $self->_applied_migrations->{$migration_key};
   }
 
   return @pending_migrations;
@@ -81,8 +82,9 @@ sub _apply_migration {
 sub _insert_into_schema_migrations {
   my $self = shift;
   my $migration = shift;
+  my $migration_key = $self->_migration_key($migration);
 
-  $self->dbh->do("INSERT INTO ". $self->schema_migrations_table ." (". $self->schema_migrations_name_field .", ". $self->schema_migrations_date_field .") VALUES (?,NOW())", undef, $migration );
+  $self->dbh->do("INSERT INTO ". $self->schema_migrations_table ." (". $self->schema_migrations_name_field .", ". $self->schema_migrations_date_field .") VALUES (?,NOW())", undef, $migration_key );
 }
 
 sub _migration_files_in_order {
@@ -105,6 +107,15 @@ sub create_migrations_table {
   ";
 
   $self->dbh->do($sql);
+}
+
+sub _migration_key {
+  my $self = shift;
+  my $migration_file = shift;
+
+  #Use filename for the key
+  my($filename, $directories, $suffix) = fileparse($migration_file);
+  return $filename;
 }
 
 1;
