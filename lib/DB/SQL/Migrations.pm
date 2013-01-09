@@ -95,6 +95,7 @@ sub _insert_into_schema_migrations {
   my $migration_key = $self->_migration_key($migration);
 
   $self->dbh->do("INSERT INTO ". $self->schema_migrations_table ." (". $self->schema_migrations_name_field .", ". $self->schema_migrations_date_field .") VALUES (?,NOW())", undef, $migration_key );
+  $self->dbh->commit;
 }
 
 sub _migration_files_in_order {
