@@ -50,8 +50,6 @@ sub apply {
   my @pending_migrations = $self->_pending_migrations;
 
   if(scalar(@pending_migrations)) {
-    print "Proceeding in 2 seconds, Ctrl-C to abort\n";
-    sleep(2);
 
     foreach my $migration(@pending_migrations) {
       $self->_apply_migration($migration);
