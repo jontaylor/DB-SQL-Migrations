@@ -150,6 +150,10 @@ DB::SQL::Migrations - apply database migrations via scripts in a directory
 
 Run a number of small SQL scripts
 
+=head1 REPOSITORY
+
+L<https://github.com/jontaylor/DB-SQL-Migrations>
+
 =head1 AUTHOR
 
 Adam Omielan, E<lt>adam@assure24.comE<gt>
