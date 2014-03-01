@@ -1,6 +1,7 @@
 Revision history for Perl module DB::SQL::Migrations
 
 0.06
+    - Added license type as 'perl_5' in metadata (via Makefile.PL)
     - Fixed abstract and tweaked wording
     - Added this file
 

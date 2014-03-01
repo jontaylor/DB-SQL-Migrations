@@ -1,5 +1,12 @@
 use 5.010000;
 use ExtUtils::MakeMaker;
+
+my $mm_ver = $ExtUtils::MakeMaker::VERSION;
+if ($mm_ver =~ /_/) { # dev version
+    $mm_ver = eval $mm_ver;
+    die $@ if $@;
+}
+
 # See lib/ExtUtils/MakeMaker.pm for details of how to influence
 # the contents of the Makefile that is written.
 WriteMakefile(
@@ -15,4 +22,10 @@ WriteMakefile(
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM  => 'lib/DB/SQL/Migrations.pm', # retrieve abstract from module
        AUTHOR         => 'Jonathan Taylor <jon@local>') : ()),
+
+    ($mm_ver >= 6.31
+        ? (LICENSE => 'perl_5')
+        : ()
+    ),
+
 );
