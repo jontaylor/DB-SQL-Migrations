@@ -1,6 +1,7 @@
 Revision history for Perl module DB::SQL::Migrations
 
 0.06
+    - Fixed abstract and tweaked wording
     - Added this file
 
 0.05 2013-01-09
