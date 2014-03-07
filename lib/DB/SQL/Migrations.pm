@@ -132,9 +132,9 @@ sub _migration_key {
 1;
 __END__
 
-=head1 DB::SQL::Migrations
+=head1 NAME
 
-DB::SQL::Migrations - Perl extension to apply migrations from a directory
+DB::SQL::Migrations - apply database migrations via scripts in a directory
 
 =head1 SYNOPSIS
 
@@ -149,6 +149,10 @@ DB::SQL::Migrations - Perl extension to apply migrations from a directory
 =head1 DESCRIPTION
 
 Run a number of small SQL scripts
+
+=head1 REPOSITORY
+
+L<https://github.com/jontaylor/DB-SQL-Migrations>
 
 =head1 AUTHOR
 
