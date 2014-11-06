@@ -6,7 +6,7 @@ use File::Basename;
 use DBIx::MultiStatementDo;
 use File::Slurp;
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 has [qw( dbh migrations_directory  )];
 has schema_migrations_table => sub { 'schema_migrations' };
