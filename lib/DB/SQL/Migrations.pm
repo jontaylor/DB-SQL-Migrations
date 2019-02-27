@@ -112,7 +112,7 @@ sub create_migrations_table {
   my $date_field = $self->schema_migrations_date_field;
 
   my $sql = "CREATE TABLE IF NOT EXISTS $table_name (
-                $name_field varchar(255) NOT NULL PRIMARY KEY,
+                $name_field varchar(255) CHARACTER SET latin1 NOT NULL PRIMARY KEY,
                 $date_field datetime NOT NULL
              );   
   ";
